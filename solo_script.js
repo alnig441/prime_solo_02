@@ -20,9 +20,14 @@ position = document.getElementById('content');
 //Loop the array, extracting each array and writing information to the DOM
 //Note that the information is not 'clean'
 for(var i = 0; i < array.length; i++){
-	array[i] = calculateSTI(array[i]);  //calling function with the first array
+  // console.log(typeof array);
+	array[i] = calculateSTI(array[i]);  
+  // console.log(array[i]);
  	newEl = document.createElement('li');
+  // console.log(newEl);
 	newText = document.createTextNode(array[i]);
+  // console.log(newText.toString());
+  // console.log>(newText);
 	newEl.appendChild(newText);
 	position.appendChild(newEl);
 }
@@ -42,10 +47,12 @@ function calculateSTI(array){
     bonus = 0.13;
   }
 
-  newArray[1] = ' ' + bonus ;
-  newArray[2] = ' ' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
-  newArray[3] = ' ' + Math.round(baseSalary * bonus);   // rounding applied
+  newArray[1] = '\t' + bonus ;
+  newArray[2] = '\t' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
+  newArray[3] = '\t' + Math.round(baseSalary * bonus);   // rounding applied
   console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
+  newArray = newArray.toString();
+  // console.log(newArray);
   return newArray;
 }
 

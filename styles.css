@@ -1,3 +1,9 @@
+ul{
+	display: inline-block;
+}
+
 li {
 	list-style: none;
+	text-align: right;
+
 }
