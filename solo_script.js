@@ -3,15 +3,31 @@
 // Line 23: calculateSTI(array) was not called with the corect array index. 
 // Line 72: return statement incorrect, -1 removed.
 // Line 46/47: rounding applied.
+var Employee = function(array){
+  this.employeeName = array[0];
+  this.employeeNumber = array[1];
+  this.baseSalary = array[2];
+  this.reviewScore = array[3];
+}
+
+var OutputData = function(employeeName, sti, adjustedSalary, bonus){
+  this.employeeName = employeeName;
+  this.STI = sti;
+  this.adjustedSalary = adjustedSalary;
+  this.bonus = bonus;
+
+}
+
+var arrayAtticus = ["Atticus", "2405", "47000", 3];
+var arrayJem = ["Jem", "62347", "63500", 4];
+var arrayBoo =["Boo", "11435", "54000", 3];
+var arrayScout = ["Scout", "6243", "74750", 5];
 
 
-var arrayAtticus = {name: "Atticus", employeeNumber: "2405", baseSalary: "47000", reviewScore: 3};
-var arrayJem = {name: "Jem", employeeNumber: "62347", baseSalary: "63500", reviewScore: 4};
-var arrayBoo = {name: "Boo", employeeNumber: "11435", baseSalary: "54000", reviewScore: 3};
-var arrayScout = {name: "Scout", employeeNumber: "6243", baseSalary: "74750", reviewScore: 5};
+// console.log(Employee(arrayAtticus));
 
-var array = [arrayAtticus, arrayJem, arrayBoo, arrayScout];
-
+var array = [new Employee(arrayAtticus), new Employee(arrayJem), new Employee(arrayBoo), new Employee(arrayScout)];
+// console.log(array);
 //Create variables used to write to the DOM
 var newEl, newText, position;
 //Capture the position of insertion into the DOM
@@ -23,23 +39,16 @@ for(var i = 0; i < array.length; i++){
   // console.log(array[i]);
   var string = "";
 	array[i] = calculateSTI(array[i]);   
-  // console.log(array[i]);
-
-  // var obj = array[i];
-  // console.log(obj);
 
   for(prop in array[i]){
     // console.log(obj[prop]);
     string += array[i][prop];
   }
 
-  // console.log(string);
  	newEl = document.createElement('li');
   // console.log(newEl);
 	// newText = document.createTextNode(array[i]['name'] + array[i]['STI'] + array[i]['adjustedSalary'] + array[i]['bonus']);
   newText = document.createTextNode(string);
-  // console.log(newText.toString());
-  // console.log(newText);
 	newEl.appendChild(newText);
 	position.appendChild(newEl);
 }
@@ -47,7 +56,8 @@ for(var i = 0; i < array.length; i++){
 function calculateSTI(object){
   var newObject = {};
 
-  newObject['name'] = ' ' + object['name'];
+  var employeeName = ' ' + object['employeeName'];
+  // newObject['employeeName'] = ' ' + object['employeeName'];
 
   var employeeNumber = object['employeeNumber'];
   var baseSalary = object['baseSalary'];
@@ -59,13 +69,18 @@ function calculateSTI(object){
     bonus = 0.13;
   }
 
-  newObject['STI'] = '\t' + bonus ;
-  newObject['adjustedSalary'] = '\t' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
-  newObject['bonus'] = '\t' + Math.round(baseSalary * bonus);   // rounding applied
-  console.log(newObject['name'] + " " + newObject['STI'] + " " + newObject['adjustedSalary'] + " " + newObject['bonus']);
+  var sti = '\t' + bonus ;
+  var adjustedSalary = '\t' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
+  var bonus = '\t' + Math.round(baseSalary * bonus);   // rounding applied
+
+  var newOutput = new OutputData(employeeName, sti, adjustedSalary, bonus);
+  // newObject['STI'] = '\t' + bonus ;
+  // newObject['adjustedSalary'] = '\t' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
+  // newObject['bonus'] = '\t' + Math.round(baseSalary * bonus);   // rounding applied
+  // console.log(newObject['employeeName'] + " " + newObject['STI'] + " " + newObject['adjustedSalary'] + " " + newObject['bonus']);
   // newArray = newArray.toString();
-  // console.log(newArray);
-  return newObject;
+  console.log(newOutput);
+  return newOutput;
 }
 
 function getBaseSTI(reviewScore){
