@@ -1,6 +1,6 @@
 // ! ! !
 // Three Bugs
-// Line 23: calculateSTI(array) was not called with the corectt array index. 
+// Line 23: calculateSTI(array) was not called with the corect array index. 
 // Line 72: return statement incorrect, -1 removed.
 // Line 46/47: rounding applied.
 
@@ -30,7 +30,7 @@ for(var i = 0; i < array.length; i++){
 function calculateSTI(array){
   var newArray = [];
 
-  newArray[0] = array[0];
+  newArray[0] = ' ' + array[0];
 
   var employeeNumber = array[1];
   var baseSalary = array[2];
@@ -42,9 +42,9 @@ function calculateSTI(array){
     bonus = 0.13;
   }
 
-  newArray[1] = bonus;
-  newArray[2] = Math.round(baseSalary * (1.0 + bonus)); // rounding applied
-  newArray[3] = Math.round(baseSalary * bonus);   // rounding applied
+  newArray[1] = ' ' + bonus ;
+  newArray[2] = ' ' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
+  newArray[3] = ' ' + Math.round(baseSalary * bonus);   // rounding applied
   console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
   return newArray;
 }
