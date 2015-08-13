@@ -5,10 +5,10 @@
 // Line 46/47: rounding applied.
 
 
-var arrayAtticus = ["Atticus", "2405", "47000", 3];
-var arrayJem = ["Jem", "62347", "63500", 4];
-var arrayBoo = ["Boo", "11435", "54000", 3];
-var arrayScout = ["Scout", "6243", "74750", 5];
+var arrayAtticus = {name: "Atticus", employeeNumber: "2405", baseSalary: "47000", reviewScore: 3};
+var arrayJem = {name: "Jem", employeeNumber: "62347", baseSalary: "63500", reviewScore: 4};
+var arrayBoo = {name: "Boo", employeeNumber: "11435", baseSalary: "54000", reviewScore: 3};
+var arrayScout = {name: "Scout", employeeNumber: "6243", baseSalary: "74750", reviewScore: 5};
 
 var array = [arrayAtticus, arrayJem, arrayBoo, arrayScout];
 
@@ -20,26 +20,38 @@ position = document.getElementById('content');
 //Loop the array, extracting each array and writing information to the DOM
 //Note that the information is not 'clean'
 for(var i = 0; i < array.length; i++){
-  // console.log(typeof array);
-	array[i] = calculateSTI(array[i]);  
   // console.log(array[i]);
+  var string = "";
+	array[i] = calculateSTI(array[i]);   
+  // console.log(array[i]);
+
+  // var obj = array[i];
+  // console.log(obj);
+
+  for(prop in array[i]){
+    // console.log(obj[prop]);
+    string += array[i][prop];
+  }
+
+  // console.log(string);
  	newEl = document.createElement('li');
   // console.log(newEl);
-	newText = document.createTextNode(array[i]);
+	// newText = document.createTextNode(array[i]['name'] + array[i]['STI'] + array[i]['adjustedSalary'] + array[i]['bonus']);
+  newText = document.createTextNode(string);
   // console.log(newText.toString());
-  // console.log>(newText);
+  // console.log(newText);
 	newEl.appendChild(newText);
 	position.appendChild(newEl);
 }
 
-function calculateSTI(array){
-  var newArray = [];
+function calculateSTI(object){
+  var newObject = {};
 
-  newArray[0] = ' ' + array[0];
+  newObject['name'] = ' ' + object['name'];
 
-  var employeeNumber = array[1];
-  var baseSalary = array[2];
-  var reviewScore = array[3];
+  var employeeNumber = object['employeeNumber'];
+  var baseSalary = object['baseSalary'];
+  var reviewScore = object['reviewScore'];
 
   var bonus = getBaseSTI(reviewScore) + getYearAdjustment(employeeNumber) - getIncomeAdjustment(baseSalary);
   // console.log(bonus);
@@ -47,13 +59,13 @@ function calculateSTI(array){
     bonus = 0.13;
   }
 
-  newArray[1] = '\t' + bonus ;
-  newArray[2] = '\t' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
-  newArray[3] = '\t' + Math.round(baseSalary * bonus);   // rounding applied
-  console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
-  newArray = newArray.toString();
+  newObject['STI'] = '\t' + bonus ;
+  newObject['adjustedSalary'] = '\t' + Math.round(baseSalary * (1.0 + bonus)); // rounding applied
+  newObject['bonus'] = '\t' + Math.round(baseSalary * bonus);   // rounding applied
+  console.log(newObject['name'] + " " + newObject['STI'] + " " + newObject['adjustedSalary'] + " " + newObject['bonus']);
+  // newArray = newArray.toString();
   // console.log(newArray);
-  return newArray;
+  return newObject;
 }
 
 function getBaseSTI(reviewScore){
