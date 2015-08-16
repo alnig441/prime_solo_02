@@ -1,9 +1,35 @@
-ul{
-	display: inline-block;
+body{
+	width: 50%;
+	margin:auto;
+}
+
+#employee{
+	/*display: inline;*/
+	/*width: 200px;*/
+	margin: 0px;
+}
+
+#calc p{
+
+
 }
 
 li {
 	list-style: none;
-	text-align: right;
+	text-align: left;
 
+}
+
+.danger {
+	color:red;
+
+}
+fieldset{
+	border-radius: 10px;
+	margin:0;
+}
+
+legend{
+	color: orange;
+	text: bold;
 }
