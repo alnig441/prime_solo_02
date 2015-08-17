@@ -1,6 +1,7 @@
 var decSal = [];
 var totalSal = 0;
-var empArray = [];  
+var empArray = [];
+var incr = 0;  
 
   var Employee = function(first, last, number, title, rating, salary){
   this.firstName = first;
@@ -10,13 +11,18 @@ var empArray = [];
   this.reviewScore = rating;
   this.salary = salary;
   totalSal += parseInt(this.salary);
+  incr++;
+  // console.log(totalSal);
   };
+
 
 $(document).ready(function(){
 
-   $('#submit').on('click', function(e){
 
-    console.log(decSal);
+   $('#submit').on('click', function(e){
+      e.preventDefault();
+
+    // console.log(totalSal);
     
     //Collect values from form fields
     var firstName = $('#firstname').val();
@@ -28,22 +34,42 @@ $(document).ready(function(){
     var newEmployee = new Employee(firstName, lastName, empNum, title, rating, salary)
     var decSal = [];
     //Build array of emloyees
+    // console.log(typeof salary)
+
     empArray.push(newEmployee);
+    newEmployee.ident = incr.toString();
+
+    console.log(newEmployee);
 
     //Populate DOM with employee elements
     postData(newEmployee);
 
     $('ul button').text('Remove');
-    $('ul button').addClass('remove');
+    $('ul button').addClass('remove' + ' ' + 'btn btn-default btn-xs');
 
+    console.log('inside submit on click '  + totalSal, decSal);
+    }) // end #submit
+
+console.log(totalSal, decSal);
+    
     //Remove employee from list
-    $('.remove').on('click', function(){
-      decSal = parseInt((decrement(this).toString()));
-      // decsal = parseInt(decSal.toString())
-      // totalSal = totalSal - decSal;
+    $('#content').on('click','.remove', function(){
+      // var temp = [];
+      decSal = decrement(this);
+      // console.log('return from decrement '+ temp);
+      // incr ++;
+      // console.log(incr);
+      // console.log(decSal);
+      // totalSal = parseInt(totalSal);
+      totalSal = totalSal - decSal;
       // console.log(totalSal);
       $(this).parent().remove();
-    })
+
+      console.log('inside content remove on click '  + totalSal, decSal);
+
+    }); //End .on click remove
+
+console.log(totalSal, decSal);
 
 
     //Sort function on click 
@@ -53,19 +79,20 @@ $(document).ready(function(){
       for(var i = 0; i<empArray.length; i++){
         postData(empArray[i]);
         $('ul button').text('Remove');
-        $('ul button').addClass('remove');
+        $('ul button').addClass('remove' + ' ' + 'btn btn-default btn-xs');
       }
-      $('.remove').on('click', function(){
-        decrement(this);
-        $(this).parent().remove();
-      })
     })
-      console.log(empArray);
-      e.preventDefault();
-    })
+     
 
-    
-  })
+    // $('.remove').on('click', function(){
+    //     decrement(this);
+    //     $(this).parent().remove();
+    // })
+
+console.log(totalSal, decSal);
+
+})// end document.ready
+
 
 function postData(employee){
 
@@ -101,8 +128,13 @@ function postData(employee){
 }
 
 function decrement(element){
-    var temp = [];
-    temp.push(parseInt(element.getAttribute('value')));    
+    // console.log(element);
+    var temp;
+    // console.log(decSal);
+    // console.log(typeof parseInt(element.getAttribute('value')));
+    temp = parseInt($(element).attr('value')); 
+    // console.log('this is decrement' + decSal + typeof decSal);
+
     return temp;
 }
 
@@ -116,6 +148,15 @@ function sortOn(property){
             return 0;   
         }
     }
+}
+
+function calcSalary(){
+  console.log('calcSalary begin')
+  console.log(typeof totalSal);
+  // totalSal = parseInt(totalSal);
+  // totalSal = parseInt(empSal) + totalSal;
+  console.log(totalSal);
+  console.log('in calcSalary end');
 }
 
 

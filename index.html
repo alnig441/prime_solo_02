@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <title>Answer Guide</title>
     <meta name="description" content="Webpage">
+    <!-- Latest compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/lumen/bootstrap.min.css" rel="stylesheet" integrity="sha256-kBMbBs0vxJSlN7T3a7hOLllj53zib5nbF7rn4NAKy04= sha512-PwtEPLjYjtwEveJNXQTih2qsQhTg4tjgIy0gruouyKN5NLD4G4jh+mMrf7cA2s5PVI71UlS8DBYr1iqrN7ivBg==" crossorigin="anonymous">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
     <link rel="stylesheet" href="styles.css">
@@ -15,7 +19,7 @@
     <div id='calc'>
       <fieldset>
         <legend>COMPANY METRICS</legend>
-        <p>Total salary:</p>
+        <p id='total'>Total salary:</p>
       </fieldset>
     </div>
 
@@ -23,21 +27,20 @@
 
       <fieldset>
       <legend>EMPLOYEE SUBMISSION FORM</legend>
-        First Name: <br>
-        <input class='data'id='firstname' type='text' required='true'>
-        <br>Last Name:<br>
-        <input class='data' type='text' required='true' id='lastname'>
-        <br>Employee #:<br>
-        <input class='data' type='number' required='true'id='id'value='0'>
-        <br>Title:<br>
-        <input class='data' type='text' id='title'>
-        <br>Last Review Score:<br>
-        <input class='data' type='number' required='true'id='rating'value='1'min='1' max='5'>
-        <br>Salary:<br>
-        <input class='data' type='number' required='true'id='salary' value='10000'>
-        <br><br>
-        <button id='submit'>Submit</button>
         
+        <label>First Name:</label>
+        <input class='data form-control'id='firstname' type='text' required='true'>
+        <label>Last Name:</label>
+        <input class='data form-control' type='text' required='true' id='lastname'>
+        <label>Employee #:</label>
+        <input class='data form-control' type='number' required='true'id='id'value='0'>
+        <label>Title:</label>
+        <input class='data form-control' type='text' id='title'>
+        <label>Last Review Score:</label>
+        <input class='data form-control' type='number' required='true'id='rating'value='1'min='1' max='5'>
+        <label>Salary:</label>
+        <input class='data form-control' type='number' required='true'id='salary' value='10000'>  
+        <button id='submit' class='btn btn-default btn-xs'>Submit</button>      
       </fieldset>
     </form>
 
@@ -45,7 +48,7 @@
 
       <fieldset>
         <legend>LIST OF EMPLOYEES</legend>
-        <button id='sort'>Sort on lastName</button>
+        <button id='sort' class='btn btn-default btn-xs'>Sort on lastName</button><br>
         <ul id="content">
 
         </ul>

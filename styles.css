@@ -26,10 +26,27 @@ li {
 }
 fieldset{
 	border-radius: 10px;
-	margin:0;
+	background-color: lightgray;
 }
 
 legend{
 	color: orange;
-	text: bold;
+	text-align: center;
+	/*text: bold;*/
+}
+
+.form-control {
+	width: 150px;
+	height: 30px;
+	font-size:12px;
+
+}
+
+button {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+input, label, p, button{
+	margin-left:20px;
+	margin-bottom:5px;
 }
