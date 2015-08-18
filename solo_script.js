@@ -1,15 +1,17 @@
-var decSal = [];
+// var decSal = [];
 var totalSal = 0;
 var empArray = [];
 var incr = 0;  
 
   var Employee = function(first, last, number, title, rating, salary){
+  
   this.firstName = first;
   this.lastName = last;
   this.employeeNumber = number;
   this.jobTitle = title;
   this.reviewScore = rating;
   this.salary = salary;
+  this.ident = "#" + incr;
   totalSal += parseInt(this.salary);
   incr++;
   // console.log(totalSal);
@@ -32,14 +34,13 @@ $(document).ready(function(){
     var rating = $('#rating').val();
     var salary = $('#salary').val();
     var newEmployee = new Employee(firstName, lastName, empNum, title, rating, salary)
-    var decSal = [];
+    // var decSal = []; 
     //Build array of emloyees
-    // console.log(typeof salary)
 
     empArray.push(newEmployee);
-    newEmployee.ident = incr.toString();
+    // newEmployee.ident = incr.toString();
 
-    console.log(newEmployee);
+    console.log(empArray);
 
     //Populate DOM with employee elements
     postData(newEmployee);
@@ -47,34 +48,28 @@ $(document).ready(function(){
     $('ul button').text('Remove');
     $('ul button').addClass('remove' + ' ' + 'btn btn-default btn-xs');
 
-    console.log('inside submit on click '  + totalSal, decSal);
+    console.log('inside submit on click '  + totalSal);
     }) // end #submit
 
-console.log(totalSal, decSal);
+console.log(totalSal);
     
     //Remove employee from list
     $('#content').on('click','.remove', function(){
-      // var temp = [];
-      decSal = decrement(this);
-      // console.log('return from decrement '+ temp);
-      // incr ++;
-      // console.log(incr);
-      // console.log(decSal);
-      // totalSal = parseInt(totalSal);
-      totalSal = totalSal - decSal;
+      totalSal = totalSal - decrement(this);
       // console.log(totalSal);
       $(this).parent().remove();
 
-      console.log('inside content remove on click '  + totalSal, decSal);
+      console.log('inside content remove on click '  + totalSal);
 
     }); //End .on click remove
 
-console.log(totalSal, decSal);
+console.log(totalSal);
 
 
     //Sort function on click 
     $('#sort').on('click', function(){
-      $('#content').children().remove();  
+      $('#content').children().remove();
+      empArray.sort(sortOn("firstName"));  
       empArray.sort(sortOn("lastName"));
       for(var i = 0; i<empArray.length; i++){
         postData(empArray[i]);
@@ -84,12 +79,8 @@ console.log(totalSal, decSal);
     })
      
 
-    // $('.remove').on('click', function(){
-    //     decrement(this);
-    //     $(this).parent().remove();
-    // })
 
-console.log(totalSal, decSal);
+console.log(totalSal);
 
 })// end document.ready
 
@@ -116,9 +107,7 @@ function postData(employee){
     
 
     newBut = document.createElement('button');
-    // newBut.className='remove';
-    newBut.setAttribute('value', employee['salary']);
-
+    $(newBut).attr({'value': employee['salary'], 'id': employee['ident']})
 
     newText = document.createTextNode(string);
     newEl.appendChild(newBut);
@@ -128,13 +117,15 @@ function postData(employee){
 }
 
 function decrement(element){
-    // console.log(element);
     var temp;
-    // console.log(decSal);
-    // console.log(typeof parseInt(element.getAttribute('value')));
-    temp = parseInt($(element).attr('value')); 
-    // console.log('this is decrement' + decSal + typeof decSal);
+    temp = parseInt($(element).attr('value'));
+    for(var i = 0; i < empArray.length; i++){
+          if(empArray[i]['ident']==element.getAttribute('id')){
+            empArray.splice(empArray[i], 1);
 
+          } 
+        }
+    console.log('inside decrement ', empArray);
     return temp;
 }
 
